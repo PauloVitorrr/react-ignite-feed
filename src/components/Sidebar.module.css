@@ -33,3 +33,8 @@
     align-items: center;
     justify-content: center;
 }
+
+.sidebar footer a:hover{
+    background: var(--green-500);
+    color: #fff;
+}
