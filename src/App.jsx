@@ -1,10 +1,10 @@
-import { Post } from './Post.jsx'
+import { Post } from './components/Post'
 import { Header } from './components/Header.jsx'
+import { Sidebar } from './components/Sidebar.jsx'
 
 import './global.css'
 
 import styles from './App.module.css'
-import { Sidebar } from './components/Sidebar.jsx'
 
 export default function App() {
 
@@ -15,14 +15,8 @@ export default function App() {
       <div className={styles.wrapper}>
         <Sidebar/>
         <main>
-          <Post
-          author="Diego Fernandes"
-          content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, quis!"
-        />
-        <Post
-          author="Paulo Vitor"
-          content="UM autor muito legal!!!!!"
-        />
+          <Post/>
+          <Post/>
         </main>
       </div>
     </div>
