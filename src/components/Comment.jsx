@@ -6,7 +6,7 @@ import { ThumbsDown, Trash } from 'phosphor-react'
 export function Comment(){
     return(
         <div className={styles.comment}>
-            <Avatar/>
+            <Avatar hasBorder={false} src="https://github.com/PauloVitorrr.png"/>
 
         <div className={styles.commentBox}>
             <div className={styles.commentContent}>
