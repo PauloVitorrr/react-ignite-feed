@@ -1,7 +1,7 @@
 import styles from './Comment.module.css'
 
 import { Avatar } from './Avatar.jsx'
-import { ThumbsDown, Trash } from 'phosphor-react'
+import { ThumbsUp, Trash } from 'phosphor-react'
 
 export function Comment(){
     return(
@@ -25,7 +25,7 @@ export function Comment(){
 
             <footer>
                 <button>
-                    <ThumbsDown />
+                    <ThumbsUp/>
                     Aplaudir <span>20</span>
                 </button>
             </footer>
