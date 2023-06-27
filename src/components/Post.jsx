@@ -2,20 +2,33 @@ import { Avatar } from './Avatar'
 import { Comment } from './Comment'
 import styles from './Post.module.css'
 
-export function Post(props){
-    console.log(props)
+const comments = [
+    1,
+    2,
+]
+
+export function Post({ author, publishedAt }){
+    const publishedDateFormatted = new Intl.DateTimeFormat('pt-BR', {
+        day: '2-digit',
+        month: 'long',
+        hour: '2-digit',
+        minute: '2-digit'
+    }).format(publishedAt)
+
     return(
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <Avatar src="https://github.com/PauloVitorrr.png"/>
+                    <Avatar src={author.avatarUrl}/>
                     <div className={styles.authorInfo}>
-                        <strong>Paulo Vitor</strong>
-                        <span>Web Developer</span>
+                        <strong>{author.name}</strong>
+                        <span>{author.role}</span>
                     </div>
                 </div>
 
-                <time title="19 de Junho ás 08:15h" dateTime="2023-06-19">Publicado há 1h</time>
+                <time title="19 de Junho ás 08:15h" dateTime="2023-06-19">
+                    {publishedDateFormatted}
+                </time>
             </header>
 
             <div className={styles.content}>
@@ -39,9 +52,9 @@ export function Post(props){
             </form>
 
             <div className={styles.commentList}>
-                <Comment/>
-                <Comment/>
-                <Comment/>
+                {comments.map(comment =>{
+                    return <Comment />
+                })}
             </div>
         </article>
     )
