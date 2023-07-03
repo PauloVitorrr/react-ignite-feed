@@ -4,11 +4,32 @@ import ptBR from 'date-fns/locale/pt-BR'
 import { Avatar } from './Avatar'
 import { Comment } from './Comment'
 import styles from './Post.module.css'
-import { useState } from 'react'
+import { FormEvent, useState, ChangeEvent, InvalidEvent } from 'react'
 
+interface Author{
+    name: string;
+    role: string;
+    avatarUrl: string;
+}
 
-export function Post({ author, publishedAt, content }){
-    const [comments, setComments] = useState([])
+// interface Content{
+//     type: 'paragraph' | 'link';
+//     content: string;
+// }
+
+interface PostProps{
+    author: Author;
+    publishedAt: Date;
+    content: Array<{
+        type: string,
+        content: string;
+    }>;
+}
+
+export function Post({ author, publishedAt, content }: PostProps){
+    const [comments, setComments] = useState([
+        'Post muito bacana, hein'
+    ])
     const [newCommentText, setNewCommentText] = useState('')
 
     const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'ás' HH:mm'h'",{
@@ -20,24 +41,23 @@ export function Post({ author, publishedAt, content }){
         addSuffix: true,
     })
 
-    function handleCreateNewComment(){
+    function handleCreateNewComment(event: FormEvent){
         event.preventDefault()
 
-        const newComment = event.target.comment.value
-        setComments([...comments, newComment])
+        setComments([...comments, newCommentText])
         setNewCommentText('')
     }
 
-    function handleNewCommentChange(){
+    function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>){
         event.target.setCustomValidity('')
         setNewCommentText(event.target.value)
     }
 
-    function handleNewCommentInvalid(){
-        console.log(event.target.setCustomValidity('Este campo é obrigatório'))
+    function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>){
+        event.target.setCustomValidity('Este campo é obrigatório')
     }
 
-    function deleteComment(commentToDelete){
+    function deleteComment(commentToDelete: string){
         //Imutabilidae -> as variaveis não sofrem mutação, nós criamos um novo valor (um novo espaço na memória)
         const commentsWithoutDeleteOne = comments.filter(comment => {
             return comment !== commentToDelete
